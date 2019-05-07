@@ -1,0 +1,136 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "example": {
+                "CollectionId": "myphotos",
+                "DetectionAttributes": [],
+                "ExternalImageId": "myphotoid",
+                "Image": {
+                    "S3Object": {
+                        "Bucket": "mybucket",
+                        "Name": "myphoto"
+                    }
+                }
+            },
+            "properties": {
+                "CollectionId": {
+                    "description": "The ID of an existing collection to which you want to add the faces that are detected in the input images.",
+                    "maxLength": 255,
+                    "minLength": 1,
+                    "pattern": "[a-zA-Z0-9_.\\-]+",
+                    "type": "string"
+                },
+                "DetectionAttributes": {
+                    "description": "<p>An array of facial attributes that you want to be returned. This can be the default list of attributes or all attributes. If you don't specify a value for <code>Attributes</code> or if you specify <code>[\"DEFAULT\"]</code>, the API returns the following subset of facial attributes: <code>BoundingBox</code>, <code>Confidence</code>, <code>Pose</code>, <code>Quality</code>, and <code>Landmarks</code>. If you provide <code>[\"ALL\"]</code>, all facial attributes are returned, but the operation takes longer to complete.</p> <p>If you provide both, <code>[\"ALL\", \"DEFAULT\"]</code>, the service uses a logical AND operator to determine which attributes to return (in this case, all attributes). </p>",
+                    "items": {
+                        "enum": [
+                            "DEFAULT",
+                            "ALL"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "ExternalImageId": {
+                    "description": "The ID you want to assign to all the faces detected in the image.",
+                    "maxLength": 255,
+                    "minLength": 1,
+                    "pattern": "[a-zA-Z0-9_.\\-:]+",
+                    "type": "string"
+                },
+                "Image": {
+                    "description": "<p>The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes isn't supported. </p> <p>If you are using an AWS SDK to call Amazon Rekognition, you might not need to base64-encode image bytes passed using the <code>Bytes</code> field. For more information, see Images in the Amazon Rekognition developer guide.</p>",
+                    "properties": {
+                        "Bytes": {
+                            "description": "Blob of image bytes up to 5 MBs.",
+                            "maxLength": 5242880,
+                            "minLength": 1,
+                            "type": "string"
+                        },
+                        "S3Object": {
+                            "description": "Identifies an S3 object as the image source.",
+                            "properties": {
+                                "Bucket": {
+                                    "description": "Name of the S3 bucket.",
+                                    "maxLength": 255,
+                                    "minLength": 3,
+                                    "pattern": "[0-9A-Za-z\\.\\-_]*",
+                                    "type": "string"
+                                },
+                                "Name": {
+                                    "description": "S3 object key name.",
+                                    "maxLength": 1024,
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "Version": {
+                                    "description": "If the bucket is versioning enabled, you can specify the object version. ",
+                                    "maxLength": 1024,
+                                    "minLength": 1,
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "MaxFaces": {
+                    "description": "<p>The maximum number of faces to index. The value of <code>MaxFaces</code> must be greater than or equal to 1. <code>IndexFaces</code> returns no more than 100 detected faces in an image, even if you specify a larger value for <code>MaxFaces</code>.</p> <p>If <code>IndexFaces</code> detects more faces than the value of <code>MaxFaces</code>, the faces with the lowest quality are filtered out first. If there are still more faces than the value of <code>MaxFaces</code>, the faces with the smallest bounding boxes are filtered out (up to the number that's needed to satisfy the value of <code>MaxFaces</code>). Information about the unindexed faces is available in the <code>UnindexedFaces</code> array. </p> <p>The faces that are returned by <code>IndexFaces</code> are sorted by the largest face bounding box size to the smallest size, in descending order.</p> <p> <code>MaxFaces</code> can be used with a collection associated with any version of the face model.</p>",
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "QualityFilter": {
+                    "description": "<p>A filter that specifies how much filtering is done to identify faces that are detected with low quality. Filtered faces aren't indexed. If you specify <code>AUTO</code>, filtering prioritizes the identification of faces that don’t meet the required quality bar chosen by Amazon Rekognition. The quality bar is based on a variety of common use cases. Low-quality detections can occur for a number of reasons. Some examples are an object that's misidentified as a face, a face that's too blurry, or a face with a pose that's too extreme to use. If you specify <code>NONE</code>, no filtering is performed. The default value is AUTO.</p> <p>To use quality filtering, the collection you are using must be associated with version 3 of the face model.</p>",
+                    "enum": [
+                        "NONE",
+                        "AUTO"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "CollectionId",
+                "Image"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

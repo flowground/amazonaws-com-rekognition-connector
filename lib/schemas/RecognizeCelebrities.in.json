@@ -1,0 +1,86 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "Image": {
+                    "description": "<p>The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported. </p> <p>If you are using an AWS SDK to call Amazon Rekognition, you might not need to base64-encode image bytes passed using the <code>Bytes</code> field. For more information, see Images in the Amazon Rekognition developer guide.</p>",
+                    "properties": {
+                        "Bytes": {
+                            "description": "Blob of image bytes up to 5 MBs.",
+                            "maxLength": 5242880,
+                            "minLength": 1,
+                            "type": "string"
+                        },
+                        "S3Object": {
+                            "description": "Identifies an S3 object as the image source.",
+                            "properties": {
+                                "Bucket": {
+                                    "description": "Name of the S3 bucket.",
+                                    "maxLength": 255,
+                                    "minLength": 3,
+                                    "pattern": "[0-9A-Za-z\\.\\-_]*",
+                                    "type": "string"
+                                },
+                                "Name": {
+                                    "description": "S3 object key name.",
+                                    "maxLength": 1024,
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "Version": {
+                                    "description": "If the bucket is versioning enabled, you can specify the object version. ",
+                                    "maxLength": 1024,
+                                    "minLength": 1,
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "Image"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

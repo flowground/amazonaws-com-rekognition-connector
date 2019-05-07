@@ -1,0 +1,114 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "ClientRequestToken": {
+                    "description": "Idempotent token used to identify the start request. If you use the same token with multiple <code>StartPersonTracking</code> requests, the same <code>JobId</code> is returned. Use <code>ClientRequestToken</code> to prevent the same job from being accidently started more than once. ",
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "pattern": "^[a-zA-Z0-9-_]+$",
+                    "type": "string"
+                },
+                "JobTag": {
+                    "description": "Unique identifier you specify to identify the job in the completion status published to the Amazon Simple Notification Service topic. ",
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "pattern": "[a-zA-Z0-9_.\\-:]+",
+                    "type": "string"
+                },
+                "NotificationChannel": {
+                    "description": "The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the people detection operation to.",
+                    "properties": {
+                        "RoleArn": {
+                            "description": "The ARN of an IAM role that gives Amazon Rekognition publishing permissions to the Amazon SNS topic. ",
+                            "pattern": "arn:aws:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
+                            "type": "string"
+                        },
+                        "SNSTopicArn": {
+                            "description": "The Amazon SNS topic to which Amazon Rekognition to posts the completion status.",
+                            "pattern": "(^arn:aws:sns:.*:\\w{12}:.+$)",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "SNSTopicArn",
+                        "RoleArn"
+                    ],
+                    "type": "object"
+                },
+                "Video": {
+                    "description": "The video in which you want to detect people. The video must be stored in an Amazon S3 bucket.",
+                    "properties": {
+                        "S3Object": {
+                            "description": "The Amazon S3 bucket name and file name for the video.",
+                            "properties": {
+                                "Bucket": {
+                                    "description": "Name of the S3 bucket.",
+                                    "maxLength": 255,
+                                    "minLength": 3,
+                                    "pattern": "[0-9A-Za-z\\.\\-_]*",
+                                    "type": "string"
+                                },
+                                "Name": {
+                                    "description": "S3 object key name.",
+                                    "maxLength": 1024,
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "Version": {
+                                    "description": "If the bucket is versioning enabled, you can specify the object version. ",
+                                    "maxLength": 1024,
+                                    "minLength": 1,
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "Video"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

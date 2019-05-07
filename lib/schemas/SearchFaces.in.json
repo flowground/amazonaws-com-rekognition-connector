@@ -1,0 +1,81 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "example": {
+                "CollectionId": "myphotos",
+                "FaceId": "70008e50-75e4-55d0-8e80-363fb73b3a14",
+                "FaceMatchThreshold": 90,
+                "MaxFaces": 10
+            },
+            "properties": {
+                "CollectionId": {
+                    "description": "ID of the collection the face belongs to.",
+                    "maxLength": 255,
+                    "minLength": 1,
+                    "pattern": "[a-zA-Z0-9_.\\-]+",
+                    "type": "string"
+                },
+                "FaceId": {
+                    "description": "ID of a face to find matches for in the collection.",
+                    "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+                    "type": "string"
+                },
+                "FaceMatchThreshold": {
+                    "description": "Optional value specifying the minimum confidence in the face match to return. For example, don't return any matches where confidence in matches is less than 70%.",
+                    "format": "float",
+                    "maximum": 100,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "MaxFaces": {
+                    "description": "Maximum number of faces to return. The operation returns the maximum number of faces with the highest confidence in the match.",
+                    "maximum": 4096,
+                    "minimum": 1,
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "CollectionId",
+                "FaceId"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

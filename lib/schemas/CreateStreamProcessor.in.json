@@ -1,0 +1,125 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "Input": {
+                    "description": "Kinesis video stream stream that provides the source streaming video. If you are using the AWS CLI, the parameter name is <code>StreamProcessorInput</code>.",
+                    "properties": {
+                        "KinesisVideoStream": {
+                            "description": "The Kinesis video stream input stream for the source streaming video.",
+                            "properties": {
+                                "Arn": {
+                                    "description": "ARN of the Kinesis video stream stream that streams the source video.",
+                                    "pattern": "(^arn:([a-z\\d-]+):kinesisvideo:([a-z\\d-]+):\\d{12}:.+$)",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "Name": {
+                    "description": "An identifier you assign to the stream processor. You can use <code>Name</code> to manage the stream processor. For example, you can get the current status of the stream processor by calling <a>DescribeStreamProcessor</a>. <code>Name</code> is idempotent. ",
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "pattern": "[a-zA-Z0-9_.\\-]+",
+                    "type": "string"
+                },
+                "Output": {
+                    "description": "Kinesis data stream stream to which Amazon Rekognition Video puts the analysis results. If you are using the AWS CLI, the parameter name is <code>StreamProcessorOutput</code>.",
+                    "properties": {
+                        "KinesisDataStream": {
+                            "description": "The Amazon Kinesis Data Streams stream to which the Amazon Rekognition stream processor streams the analysis results.",
+                            "properties": {
+                                "Arn": {
+                                    "description": "ARN of the output Amazon Kinesis Data Streams stream.",
+                                    "pattern": "(^arn:([a-z\\d-]+):kinesis:([a-z\\d-]+):\\d{12}:.+$)",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "RoleArn": {
+                    "description": "ARN of the IAM role that allows access to the stream processor.",
+                    "pattern": "arn:aws:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
+                    "type": "string"
+                },
+                "Settings": {
+                    "description": "Face recognition input parameters to be used by the stream processor. Includes the collection to use for face recognition and the face attributes to detect.",
+                    "properties": {
+                        "FaceSearch": {
+                            "description": "Face search settings to use on a streaming video. ",
+                            "properties": {
+                                "CollectionId": {
+                                    "description": "The ID of a collection that contains faces that you want to search for.",
+                                    "maxLength": 255,
+                                    "minLength": 1,
+                                    "pattern": "[a-zA-Z0-9_.\\-]+",
+                                    "type": "string"
+                                },
+                                "FaceMatchThreshold": {
+                                    "description": "Minimum face match confidence score that must be met to return a result for a recognized face. Default is 70. 0 is the lowest confidence. 100 is the highest confidence.",
+                                    "format": "float",
+                                    "maximum": 100,
+                                    "minimum": 0,
+                                    "type": "number"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "Input",
+                "Output",
+                "Name",
+                "Settings",
+                "RoleArn"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}
